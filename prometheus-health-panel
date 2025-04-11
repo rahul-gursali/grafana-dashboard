@@ -1,0 +1,10 @@
+# Service Up ( Alert when any monitored service is down ) 
+up == 0
+
+# Missing Metrics ( Alert if expected targets missing )
+absent(node_cpu_seconds_total)
+
+# Scrape Failures ( Alert if > 0 ) 
+rate(prometheus_scrape_failed_total[5m])
+
+

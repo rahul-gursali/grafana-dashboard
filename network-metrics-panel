@@ -1,0 +1,3 @@
+# Network In/Out ( Alert if sudden spike/drop )
+rate(node_network_receive_bytes_total{device!~"lo"}[5m]), rate(node_network_transmit_bytes_total{device!~"lo"}[5m])
+

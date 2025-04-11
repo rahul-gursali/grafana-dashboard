@@ -1,0 +1,14 @@
+# CPU Usage % ( Alert if > 90% for 5 mins )
+100 - (avg by(instance)(rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)
+
+# Memory Usage % ( Alert if > 90% )
+(1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100
+
+# Disk Usage % ( Alert if > 85% ) 
+100 - ((node_filesystem_avail_bytes{fstype!="tmpfs"} * 100) / node_filesystem_size_bytes)
+
+# Disk IOPS (Read/Write) ( Alert if IOPS unusually high ) 
+rate(node_disk_reads_completed_total[5m]) / rate(node_disk_writes_completed_total[5m])
+
+# Disk Throughput ( For analysis, no alert ) 
+rate(node_disk_read_bytes_total[5m]), rate(node_disk_written_bytes_total[5m]) 

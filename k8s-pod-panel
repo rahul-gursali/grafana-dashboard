@@ -1,0 +1,16 @@
+# Pod CPU Usage ( Alert if > 90% of CPU request )
+rate(container_cpu_usage_seconds_total{container!="",pod!=""}[5m])
+
+# Pod Memory Usage ( Alert if memory exceeds limit ) 
+container_memory_usage_bytes{container!="",pod!=""}
+
+# Pod Restarts ( Alert if restart > 3 in 5m  )
+increase(kube_pod_container_status_restarts_total[5m])
+
+# Pods Not Ready ( Alert if any critical pod not ready )
+kube_pod_status_ready{condition="false"}
+
+# Node Not Ready ( Immediate alert ) 
+kube_node_status_condition{condition="Ready", status="false"}
+
+

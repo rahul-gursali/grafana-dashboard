@@ -1,0 +1,9 @@
+# HTTP Request Rate ( Alert if drops to 0 (depends on app))
+rate(http_requests_total[5m])
+
+# HTTP 5xx Rate ( Alert if > 1% of traffic )
+rate(http_requests_total{status=~"5.."}[5m])
+
+# Request Latency (P95) ( Alert if > threshold (e.g. 1s))
+histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))
+
